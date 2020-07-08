@@ -63,7 +63,7 @@ class Search
      * operations return the contents of the _source field unless you have used the
      * stored_fields parameter or if the _source field is disabled.
      *
-     * @var bool
+     * @var array|bool|string
      */
     private $source;
 
@@ -518,7 +518,7 @@ class Search
     }
 
     /**
-     * @return bool
+     * @return array|bool|string
      */
     public function isSource()
     {
@@ -526,7 +526,7 @@ class Search
     }
 
     /**
-     * @param bool $source
+     * @param array|bool|string $source
      *
      * @return $this
      */
