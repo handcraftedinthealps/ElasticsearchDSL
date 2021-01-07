@@ -18,19 +18,19 @@ jobs:
             matrix:
                 include:
                     - php-version: '5.4'
-                      lint: false
+                      lint: true
 
                     - php-version: '5.6'
-                      lint: false
+                      lint: true
 
                     - php-version: '7.0'
-                      lint: false
+                      lint: true
 
                     - php-version: '7.2'
-                      lint: false
+                      lint: true
 
                     - php-version: '7.4'
-                      lint: false
+                      lint: true
 
                     - php-version: '8.0'
                       lint: true
@@ -68,10 +68,11 @@ jobs:
               run: vendor/bin/phpcs -p --standard=PSR2 --ignore=vendor/,src/Filter/ ./
 
             - name: Run tests
-              run: vendor/bin/phpunit --coverage-clover=coverage.clover
+              run: vendor/bin/phpunit --coverage-clover=build/logs/clover.xml
 
-            - name: Coveralls GitHub Action
-              uses: coverallsapp/github-action@v1.1.2
-              with:
-                  github-token: ${{ secrets.GITHUB_TOKEN }}
-                  path-to-lcov: 'coverage.clover'
+            - name: Upload coverage results to Coveralls
+              env:
+                  COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              run: |
+                  composer global require php-coveralls/php-coveralls
+                  php-coveralls --coverage_clover=build/logs/clover.xml -v
