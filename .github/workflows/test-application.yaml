@@ -70,9 +70,6 @@ jobs:
             - name: Run tests
               run: vendor/bin/phpunit --coverage-clover=coverage.clover
 
-            - name: Upload code coverage data
-              run: vendor/bin/coveralls
-
             - name: Coveralls GitHub Action
               uses: coverallsapp/github-action@v1.1.2
               with:
