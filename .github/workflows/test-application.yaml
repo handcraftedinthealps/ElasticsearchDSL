@@ -1,0 +1,80 @@
+name: Test application
+
+on:
+    pull_request:
+    push:
+        branches:
+            - master
+            - '[0-9]+.[0-9]+'
+            - '[0-9]+.x'
+
+jobs:
+    php:
+        name: "Run tests with php ${{ matrix.php-version }}"
+        runs-on: ubuntu-latest
+
+        strategy:
+            fail-fast: false
+            matrix:
+                include:
+                    - php-version: '5.4'
+                      lint: false
+
+                    - php-version: '5.6'
+                      lint: false
+
+                    - php-version: '7.0'
+                      lint: false
+
+                    - php-version: '7.2'
+                      lint: false
+
+                    - php-version: '7.4'
+                      lint: false
+
+                    - php-version: '8.0'
+                      lint: true
+
+        steps:
+            - name: Checkout project
+              uses: actions/checkout@v2
+
+            - name: Install and configure PHP
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: ${{ matrix.php-version }}
+                  tools: 'composer'
+
+            - name: Get composer cache directory
+              id: composer-cache-dir
+              run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+            - name: Cache dependencies
+              uses: actions/cache@v2
+              id: composer-cache
+              with:
+                  path: ${{ steps.composer-cache-dir.outputs.dir }}
+                  key: ${{ runner.os }}-composer-${{ hashFiles('composer.lock') }}
+                  restore-keys: |
+                      ${{ runner.os }}-composer-
+
+            - name: Install dependencies
+              run: |
+                  composer validate --strict
+                  composer install --no-interaction --prefer-dist
+
+            - name: Fix code style
+              if: ${{ matrix.lint }}
+              run: vendor/bin/phpcs -p --standard=PSR2 --ignore=vendor/,src/Filter/ ./
+
+            - name: Run tests
+              run: vendor/bin/phpunit --coverage-clover=coverage.clover
+
+            - name: Upload code coverage data
+              run: vendor/bin/coveralls
+
+            - name: Coveralls GitHub Action
+              uses: coverallsapp/github-action@v1.1.2
+              with:
+                  github-token: ${{ secrets.GITHUB_TOKEN }}
+                  path-to-lcov: 'coverage.clover'
