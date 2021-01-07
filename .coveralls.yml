@@ -1,3 +1,2 @@
 coverage_clover: coverage.clover
-src_dir: ./
 json_path: ./coveralls.json
