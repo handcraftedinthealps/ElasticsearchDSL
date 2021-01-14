@@ -4,13 +4,12 @@ on:
     pull_request:
     push:
         branches:
-            - master
             - '[0-9]+.[0-9]+'
             - '[0-9]+.x'
 
 jobs:
     php:
-        name: "Run tests with php ${{ matrix.php-version }}"
+        name: 'Run tests with php ${{ matrix.php-version }}'
         runs-on: ubuntu-latest
 
         strategy:
@@ -29,17 +28,20 @@ jobs:
                     - php-version: '7.3'
                       lint: true
 
-        services:
-            elasticsearch:
-                image: elasticsearch:2.4.6
-                ports:
-                    - 9200:9200
-                env:
-                    discovery.type: 'single-node'
-                    xpack.security.enabled: 'false'
-                options: --health-cmd="curl http://localhost:9200/_cluster/health" --health-interval=10s --health-timeout=5s --health-retries=5
-
         steps:
+            - name: Run elasticsearch
+              run: >-
+                docker run -it -p "9200:9200"
+                --health-cmd="curl http://localhost:9200/_cluster/health"
+                --health-interval=10s
+                --health-timeout=5s
+                --health-retries=5
+                --env discovery.type="single-node"
+                --env xpack.security.enabled="false"
+                elasticsearch:2.4.6
+                --script.inline true
+                --script.stored true
+
             - name: Checkout project
               uses: actions/checkout@v2
 
