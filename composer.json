@@ -22,8 +22,7 @@
     },
     "require-dev": {
         "phpunit/phpunit": "^5.7.27 || ^7.5.20",
-        "squizlabs/php_codesniffer": "~2.0",
-        "php-coveralls/php-coveralls": "~1.0|~2.0"
+        "squizlabs/php_codesniffer": "~2.0"
     },
     "suggest": {
         "elasticsearch/elasticsearch": "This library is for elasticsearch/elasticsearch client to enhance it with DSL functionality."
