@@ -80,3 +80,8 @@ jobs:
 
             - name: Upload coverage results to Coveralls
               run: vendor/bin/php-coveralls
+              env:
+                  # Running coveralls with default config did not work so followed the workaround below:
+                  # https://github.com/php-coveralls/php-coveralls/issues/273#issuecomment-537473525
+                  COVERALLS_RUN_LOCALLY: 1
+                  COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}

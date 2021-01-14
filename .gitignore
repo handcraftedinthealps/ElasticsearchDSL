@@ -1,3 +1,4 @@
 /vendor/
 /phpunit.xml
+/coverage.clover
 /composer.lock
