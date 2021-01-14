@@ -79,4 +79,4 @@ jobs:
               run: vendor/bin/phpunit --coverage-clover=coverage.clover
 
             - name: Upload coverage results to Coveralls
-              run: vendor/bin/coveralls
+              run: vendor/bin/php-coveralls
