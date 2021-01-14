@@ -33,8 +33,8 @@ jobs:
                       symfony-version: '^5.0'
 
         services:
-            elasticsearch5:
-                image: elasticsearch:6.8
+            elasticsearch:
+                image: elasticsearch:6.8.10
                 ports:
                     - 9200:9200
                 env:
@@ -76,7 +76,7 @@ jobs:
               run: vendor/bin/phpcs -p --standard=PSR2 --ignore=vendor/ ./
 
             - name: Run tests
-              run: vendor/bin/phpunit--coverage-clover=coverage.xml
+              run: vendor/bin/phpunit --coverage-clover=coverage.xml
 
             - name: Code Coverage Upload
-              run: curl -s https://codecov.io/bash)
+              run: curl -s https://codecov.io/bash
