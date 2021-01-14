@@ -31,13 +31,13 @@ jobs:
 
         services:
             elasticsearch:
-                image: elasticsearch:2.4.6
+                image: elasticsearch:2.4
                 ports:
                     - 9200:9200
                 env:
                     discovery.type: 'single-node'
                     xpack.security.enabled: 'false'
-                options: --health-cmd="curl http://localhost:9200/_cluster/health" --health-interval=10s --health-timeout=5s --health-retries=5
+                options: --script.inline true --script.stored true --health-cmd="curl http://localhost:9200/_cluster/health" --health-interval=10s --health-timeout=5s --health-retries=5
 
         steps:
             - name: Checkout project
