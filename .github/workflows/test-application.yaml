@@ -31,7 +31,7 @@ jobs:
         steps:
             - name: Run elasticsearch
               run: >-
-                docker run -it -p "9200:9200"
+                docker run -d -p "9200:9200"
                 --health-cmd="curl http://localhost:9200/_cluster/health"
                 --health-interval=10s
                 --health-timeout=5s
