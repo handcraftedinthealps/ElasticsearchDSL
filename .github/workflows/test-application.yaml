@@ -67,8 +67,8 @@ jobs:
 
             - name: Install dependencies
               run: |
-                  composer validate --strict
-                  composer require --no-update symfony/symfony:${{ matrix.symfony.version }}
+                  composer validate
+                  composer require --no-update symfony/symfony:${{ matrix.symfony-version }}
                   composer install --no-interaction --prefer-dist
 
             - name: Fix code style
