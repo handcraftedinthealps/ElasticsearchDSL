@@ -3,3 +3,4 @@
 /coverage.clover
 /composer.lock
 coverage.xml
+.phpunit.result.cache
