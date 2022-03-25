@@ -9,7 +9,7 @@ on:
 
 jobs:
     php:
-        name: 'Run tests with php ${{ matrix.php-version }}'
+        name: 'Run tests with php ${{ matrix.php-version }}, symfony ${{ matrix.symfony-version }}'
         runs-on: ubuntu-latest
 
         strategy:
@@ -18,15 +18,19 @@ jobs:
                 include:
                     - php-version: '7.4'
                       lint: true
-                      symfony-version: '^5.0'
+                      symfony-version: '^2.8'
+
+                    - php-version: '7.4'
+                      lint: true
+                      symfony-version: '^3.4'
 
                     - php-version: '8.0'
                       lint: true
-                      symfony-version: '^5.0'
+                      symfony-version: '^4.4'
 
                     - php-version: '8.1'
                       lint: true
-                      symfony-version: '^5.0'
+                      symfony-version: '^5.4'
 
         services:
             elasticsearch:
@@ -64,7 +68,7 @@ jobs:
             - name: Install dependencies
               run: |
                   composer validate --strict
-                  composer require --no-update symfony/symfony:${{ matrix.symfony-version }}
+                  composer require --no-update symfony/serializer:${{ matrix.symfony-version }}
                   composer install --no-interaction --prefer-dist
 
             - name: Fix code style

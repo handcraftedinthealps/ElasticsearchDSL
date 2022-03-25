@@ -5,7 +5,7 @@ With some basic changes to support wider range of Symfony Versions.
 
 | Version | Supported Elasticsearch Version | Supported Symfony Version |
 |---------|---------------------------------|---------------------------|
-| 8.x     | ^8.0                            | ^5.0,                     |
+| 8.x     | ^8.0                            | ^5.0, ^4.4, ^3.4, ^2.8    |
 | 7.x     | ^7.0                            | ^5.0, ^4.0, ^3.4, ^2.8    |
 | 6.x     | ^6.0                            | ^5.0, ^4.0, ^3.4, ^2.8    |
 | 5.x     | ^5.0                            | ^5.0, ^4.0, ^3.4, ^2.8    |
