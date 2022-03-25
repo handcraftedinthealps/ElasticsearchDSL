@@ -12,36 +12,41 @@
 namespace ONGR\ElasticsearchDSL\Serializer;
 
 use ONGR\ElasticsearchDSL\Serializer\Normalizer\OrderedNormalizerInterface;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Serializer;
 
 /**
  * Custom serializer which orders data before normalization.
+ *
+ * @internal
  */
-class OrderedSerializer extends Serializer
+class OrderedSerializer implements NormalizerInterface
 {
+    /**
+     * @var NormalizerInterface
+     */
+    private $serializer;
+
+    public function __construct(array $normalizers = [], array $encoders = [])
+    {
+        $this->serializer = new Serializer($normalizers, $encoders);
+    }
+
     /**
      * {@inheritdoc}
      */
     public function normalize($data, $format = null, array $context = [])
     {
-        return parent::normalize(
+        return $this->serializer->normalize(
             is_array($data) ? $this->order($data) : $data,
             $format,
             $context
         );
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function denormalize($data, $type, $format = null, array $context = [])
+    public function supportsNormalization($data, $format = null): bool
     {
-        return parent::denormalize(
-            is_array($data) ? $this->order($data) : $data,
-            $type,
-            $format,
-            $context
-        );
+        return $this->serializer->supportsNormalization($data, $format);
     }
 
     /**
