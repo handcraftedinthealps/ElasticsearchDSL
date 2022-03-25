@@ -9,7 +9,7 @@ on:
 
 jobs:
     php:
-        name: 'Run tests with php ${{ matrix.php-version }}'
+        name: 'Run tests with php ${{ matrix.php-version }} symfony ${{ matrix.symfony-version }}'
         runs-on: ubuntu-latest
 
         strategy:
@@ -72,7 +72,7 @@ jobs:
             - name: Install dependencies
               run: |
                   composer validate --strict
-                  composer require --no-update symfony/symfony:${{ matrix.symfony-version }}
+                  composer require --no-update symfony/serializer:${{ matrix.symfony-version }}
                   composer install --no-interaction --prefer-dist
 
             - name: Fix code style
