@@ -1,5 +1,4 @@
 <?php
-
 /*
  * This file is part of the ONGR package.
  *
@@ -9,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace ONGR\ElasticsearchDSL\Tests\Unit\Metric\Aggregation;
+namespace ONGR\ElasticsearchDSL\Tests\Unit\Aggregation\Metric;
 
 use ONGR\ElasticsearchDSL\Aggregation\Metric\TopHitsAggregation;
 use ONGR\ElasticsearchDSL\Sort\FieldSort;

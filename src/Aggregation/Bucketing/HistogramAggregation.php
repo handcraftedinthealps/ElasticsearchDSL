@@ -203,7 +203,9 @@ class HistogramAggregation extends AbstractAggregation
                 'min' => $min,
                 'max' => $max,
             ],
-            'strlen'
+            static function ($item) {
+                return $item !== null;
+            }
         );
         $this->extendedBounds = $bounds;
 
@@ -232,7 +234,7 @@ class HistogramAggregation extends AbstractAggregation
                 'keyed' => $this->isKeyed(),
                 'order' => $this->getOrder(),
             ],
-            function ($val) {
+            static function ($val) {
                 return ($val || is_numeric($val));
             }
         );
