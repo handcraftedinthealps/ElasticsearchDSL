@@ -87,6 +87,18 @@ class Search
     private $scriptFields;
 
     /**
+     * Allows to return a script evaluation (based on different fields) at query time.
+     * Compared to script fields, runtime fields can also be used for aggregations.
+     * Elasticsearch sees runtime fields no differently like any other field.
+     * The script has access to the entire context of a document, including the
+     * original _source and any mapped fields plus their values. The script runs only
+     * against the top hits just like script fields do.
+     *
+     * @var array
+     */
+    private $runtimeFields;
+
+    /**
      * Allows to return the doc value representation of a field for each hit. Doc value
      * fields can work on fields that are not stored. Note that if the fields parameter
      * specifies fields without docvalues it will try to load the value from the fielddata
@@ -581,6 +593,26 @@ class Search
     /**
      * @return array
      */
+    public function getRuntimeFields()
+    {
+        return $this->runtimeFields;
+    }
+
+    /**
+     * @param array $runtimeFields
+     *
+     * @return $this
+     */
+    public function setRuntimeFields($runtimeFields)
+    {
+        $this->runtimeFields = $runtimeFields;
+
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
     public function getDocValueFields()
     {
         return $this->docValueFields;
@@ -786,6 +818,7 @@ class Search
             'source' => '_source',
             'storedFields' => 'stored_fields',
             'scriptFields' => 'script_fields',
+            'runtimeFields' => 'runtime_mappings',
             'docValueFields' => 'docvalue_fields',
             'explain' => 'explain',
             'version' => 'version',
