@@ -44,6 +44,23 @@ jobs:
                       lint: true
                       symfony-version: '^6.0'
 
+                    - php-version: '8.2'
+                      lint: true
+                      symfony-version: '^6.0'
+
+                    - php-version: '8.2'
+                      lint: true
+                      symfony-version: '^7.0'
+
+                    - php-version: '8.3'
+                      lint: true
+                      symfony-version: '^7.0'
+
+                    - php-version: '8.4'
+                      lint: true
+                      symfony-version: '^7.0'
+                      composer-options: '--ignore-platform-reqs'
+
         services:
             elasticsearch:
                 image: elasticsearch:7.5.2
@@ -81,7 +98,7 @@ jobs:
               run: |
                   composer validate --strict
                   composer require --no-update symfony/symfony:${{ matrix.symfony-version }}
-                  composer install --no-interaction --prefer-dist
+                  composer update --no-interaction --prefer-dist ${{ matrix.compser-options }}
 
             - name: Fix code style
               if: ${{ matrix.lint }}

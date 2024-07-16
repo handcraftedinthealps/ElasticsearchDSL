@@ -3,13 +3,13 @@
 This is a fork of the [ongr/elasticsearch-dsl](https://github.com/ongr-io/ElasticsearchDSL).
 With some basic changes to support wider range of Symfony Versions.
 
-| Version | Supported Elasticsearch Version | Supported Symfony Version       |
-|---------|---------------------------------|---------------------------------|
-| 7.x     | ^7.0                            | ^6.0, ^5.0, ^4.0, ^3.4, ^2.8    |
-| 6.x     | ^6.0                            | ^5.0, ^4.0, ^3.4, ^2.8          |
-| 5.x     | ^5.0                            | ^5.0, ^4.0, ^3.4, ^2.8          |
-| 2.x     | ^2.0                            | ^3.0, ^2.7                      |
-| 1.x     | ^1.0                            | ^3.0, ^2.7                      |
+| Version | Supported Elasticsearch Version | Supported Symfony Version          |
+|---------|---------------------------------|------------------------------------|
+| 7.x     | ^7.0                            | ^7.0, ^6.0, ^5.0, ^4.0, ^3.4, ^2.8 |
+| 6.x     | ^6.0                            | ^5.0, ^4.0, ^3.4, ^2.8             |
+| 5.x     | ^5.0                            | ^5.0, ^4.0, ^3.4, ^2.8             |
+| 2.x     | ^2.0                            | ^3.0, ^2.7                         |
+| 1.x     | ^1.0                            | ^3.0, ^2.7                         |
 
 ## Documentation
 
