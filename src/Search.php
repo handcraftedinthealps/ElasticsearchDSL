@@ -175,6 +175,14 @@ class Search
     private $scroll;
 
     /**
+     * You can use the collapse parameter to collapse search results based on field values. The
+     * collapsing is done by selecting only the top sorted document per collapse key.
+     *
+     * @var array
+     */
+    private $collapse;
+
+    /**
      * @var OrderedSerializer
      */
     private static $serializer;
@@ -769,6 +777,13 @@ class Search
         return $this;
     }
 
+    public function setCollapse(array $collapse)
+    {
+        $this->collapse = $collapse;
+
+        return $this;
+    }
+
     /**
      * @param string $name
      * @param string|array|bool $value
@@ -843,6 +858,7 @@ class Search
             'minScore' => 'min_score',
             'searchAfter' => 'search_after',
             'trackTotalHits' => 'track_total_hits',
+            'collapse' => 'collapse'
         ];
 
         foreach ($params as $field => $param) {
