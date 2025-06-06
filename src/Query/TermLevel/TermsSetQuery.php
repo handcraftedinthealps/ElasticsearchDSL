@@ -80,8 +80,9 @@ class TermsSetQuery implements BuilderInterface
             !isset($parameters[self::MINIMUM_SHOULD_MATCH_TYPE_SCRIPT]) &&
             !isset($parameters[self::MINIMUM_SHOULD_MATCH_TYPE])
         ) {
-            $message = "Either minimum_should_match, minimum_should_match_field or minimum_should_match_script must be set.";
-            throw new \InvalidArgumentException($message);
+            throw new \InvalidArgumentException(
+                "Either minimum_should_match, minimum_should_match_field or minimum_should_match_script must be set."
+            );
         }
     }
 }
