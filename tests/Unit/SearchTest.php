@@ -37,4 +37,14 @@ class SearchTest extends \PHPUnit\Framework\TestCase
 
         $this->assertArrayHasKey('scroll', $search->getUriParams());
     }
+
+    public function testCollapse()
+    {
+        $search = new Search();
+        $search->setCollapse([
+            'field' => 'user_id'
+        ]);
+
+        $this->assertArrayHasKey('collapse', $search->toArray());
+    }
 }
