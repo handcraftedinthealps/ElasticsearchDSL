@@ -32,7 +32,7 @@ abstract class AbstractSearchEndpoint extends AbstractNormalizable implements Se
      */
     public function add(BuilderInterface $builder, $key = null)
     {
-        if (array_key_exists($key, $this->container)) {
+        if ($key && array_key_exists($key, $this->container)) {
             throw new \OverflowException(sprintf('Builder with %s name for endpoint has already been added!', $key));
         }
 
