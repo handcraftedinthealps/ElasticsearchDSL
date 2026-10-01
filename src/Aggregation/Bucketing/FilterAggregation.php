@@ -35,7 +35,7 @@ class FilterAggregation extends AbstractAggregation
      * @param string           $name
      * @param BuilderInterface $filter
      */
-    public function __construct($name, BuilderInterface $filter = null)
+    public function __construct($name, ?BuilderInterface $filter = null)
     {
         parent::__construct($name);
 
